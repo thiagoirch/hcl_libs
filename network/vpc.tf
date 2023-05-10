@@ -25,15 +25,14 @@ resource "aws_subnet" "sn_Pub" {
   availability_zone = var.subnetAZ[count.index] 
   
 }
-/*
 resource "aws_security_group" "sg-app" {
     name = "SG-${var.securityGroupApp}-${var.environMent}"
     vpc_id = aws_vpc.VPC01.id
     ingress { 
       from_port = 0
-      to_port = 0
+      to_port = 443
       protocol = "tcp"
-      cidr_blocks = ["${var.subnet_Cidr}"]
+      cidr_blocks = aws_subnet.sn_Pub.cidr_block
     }
     egress {
         from_port = 0
@@ -43,4 +42,3 @@ resource "aws_security_group" "sg-app" {
     }
 
 }
-*/
