@@ -1,9 +1,14 @@
+#Main
+variable "subnetAZ" {}
+variable "environMent" {}
+#VPC
 variable "vpcCidr" {}
+#Subnets
 variable "cidrblocksData" {}
 variable "cidrblocksApp" {}
 variable "cidrblocksPub" {}
-variable "subnetAZ" {}
-variable "environMent" {}
+variable "outsnPubCidr" {}
+#Security Groups
 variable "sgData" {}
 variable "sgApp"{}
 variable "sgPub" {}
