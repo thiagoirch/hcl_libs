@@ -12,3 +12,5 @@ variable "outsnPubCidr" {}
 variable "sgData" {}
 variable "sgApp"{}
 variable "sgPub" {}
+variable "dbPort" {}
+variable "httpsPort" {}
