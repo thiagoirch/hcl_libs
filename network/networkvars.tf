@@ -8,6 +8,8 @@ variable "cidrblocksData" {}
 variable "cidrblocksApp" {}
 variable "cidrblocksPub" {}
 variable "outsnPubCidr" {}
+variable "outsnAppCidr" {}
+variable "outsnDataCidr" {}
 #Security Groups
 variable "sgData" {}
 variable "sgApp"{}

@@ -13,6 +13,8 @@ module "network" {
     cidrblocksApp = var.cidrblocksApp
     cidrblocksPub = var.cidrblocksPub
     outsnPubCidr = module.network.outsnPubCidr
+    outsnAppCidr = module.network.outsnAppCidr
+    outsnDataCidr = module.network.outsnDataCidr
     #Security Group
     sgData = var.sgData
     sgApp = var.sgApp
