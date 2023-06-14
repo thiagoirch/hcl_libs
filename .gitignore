@@ -35,3 +35,5 @@ terraform.rc
 .terraform
 tfplan
 .lock.hcl
+.tfstate
+.tfstate.backup
