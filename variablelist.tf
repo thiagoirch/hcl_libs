@@ -11,13 +11,13 @@ variable "vpcCidr" {
     default = "10.1.0.0/16"
 }
 variable "sgData" {
-    default = "app"
+    default = "data"
 }
 variable "sgApp" {
     default = "app"
 }
 variable "sgPub" {
-    default = "app"
+    default = "pub"
 }
 variable "envName" {
     default = "Lab Fantasma"
