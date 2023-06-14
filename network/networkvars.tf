@@ -10,9 +10,11 @@ variable "cidrblocksPub" {}
 variable "outsnPubCidr" {}
 variable "outsnAppCidr" {}
 variable "outsnDataCidr" {}
+variable "outsnAppIds" {}
 #Security Groups
 variable "sgData" {}
 variable "sgApp"{}
 variable "sgPub" {}
 variable "dbPort" {}
 variable "httpsPort" {}
+

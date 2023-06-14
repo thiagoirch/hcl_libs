@@ -11,6 +11,4 @@ output "outsnAppIds" {
 output "outsnDataCidr" {
   value = aws_subnet.sn_Data.*.cidr_block
 }
-output "outsgAppId" {
-  value = aws_security_group.sg-app.id
-}
+

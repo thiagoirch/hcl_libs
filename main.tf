@@ -16,7 +16,6 @@ module "network" {
     outsnAppCidr = module.network.outsnAppCidr
     outsnAppIds = module.network.outsnAppIds
     outsnDataCidr = module.network.outsnDataCidr
-    #outsgAppId = module.network.outsgAppId
     #Security Group
     sgData = var.sgData
     sgApp = var.sgApp
@@ -27,5 +26,5 @@ module "network" {
 module "webserver"{
     source = "./webserver"
     #sgWebserver = var.outsgAppId
-    #subNet = var.outsnAppIds
+    subNet = module.network.outsnAppIds
 }

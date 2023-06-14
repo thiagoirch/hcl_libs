@@ -13,6 +13,7 @@ resource "aws_launch_configuration" "lc_webserver" {
   image_id      = data.aws_ami.amzlinux.id
   instance_type = "t3.medium"
   security_groups = []
+  
   root_block_device {
     volume_type           = "gp3"
     volume_size           = 10
@@ -28,6 +29,8 @@ resource "aws_autoscaling_group" "asg_webserver" {
   min_size                  = 2
   max_size                  = 5
   desired_capacity          = 2
+  #count = length(var.subNet)
+  vpc_zone_identifier = var.subNet #[count.index]
 }
 
 resource "aws_autoscaling_policy" "sop_webserver" {
@@ -71,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "sia_webserver" {
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = 120
-  statistic           = "average"
+  statistic           = "Average"
   threshold           = "40"
   alarm_description   = "Utilização de CPU"
   alarm_actions       = [aws_autoscaling_policy.sip_webserver.arn]
