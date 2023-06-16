@@ -17,7 +17,7 @@ resource "aws_security_group" "sg-Pub" {
     }
 
 }
-resource "aws_security_group" "sg-app" {
+resource "aws_security_group" "sg-App" {
     name = "SG-${var.sgApp}-${var.environMent}"
     vpc_id = aws_vpc.VPC01.id
     

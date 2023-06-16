@@ -15,6 +15,7 @@ module "network" {
     outsnPubCidr = module.network.outsnPubCidr
     outsnAppCidr = module.network.outsnAppCidr
     outsnAppIds = module.network.outsnAppIds
+    outsnPubIds = module.network.outsnPubIds
     outsnDataCidr = module.network.outsnDataCidr
     #Security Group
     sgData = var.sgData
@@ -22,9 +23,14 @@ module "network" {
     sgPub = var.sgPub
     httpsPort = var.httpsPort
     dbPort = var.dbPort
+    outsgPubId = module.network.outsgPubId
+    outsgAppId = module.network.outsgAppId
 }
 module "webserver"{
     source = "./webserver"
     #sgWebserver = var.outsgAppId
-    subNet = module.network.outsnAppIds
+    subnetApp = module.network.outsnAppIds
+    subnetPub = module.network.outsnPubIds
+    sgPub = module.network.outsgPubId
+    sgApp = module.network.outsgAppId
 }
