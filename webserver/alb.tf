@@ -5,8 +5,8 @@ resource "aws_lb" "alb_webserver" {
   subnets            = [var.subnetPub]
 }
 
-resource "aws_lb_listener" "example" {
-  load_balancer_arn = aws_lb.example.arn
+resource "aws_lb_listener" "http_webserver" {
+  load_balancer_arn = aws_lb.alb_webserver.arn
   port              = 80
   protocol          = "HTTP"
 
@@ -20,12 +20,12 @@ resource "aws_lb_listener" "example" {
   }
 }
 
-resource "aws_lb_listener" "example_https" {
-  load_balancer_arn = aws_lb.example.arn
+resource "aws_lb_listener" "https_webserver" {
+  load_balancer_arn = aws_lb.alb_webserver.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.example.arn
+  certificate_arn   = aws_acm_certificate.webserver.arn
 
   default_action {
     target_group_arn = aws_lb_target_group.example.arn
@@ -33,7 +33,7 @@ resource "aws_lb_listener" "example_https" {
   }
 }
 
-resource "aws_lb_target_group" "example" {
+resource "aws_lb_target_group" "webserver" {
   name        = "example-target-group"
   port        = 80
   protocol    = "HTTP"
