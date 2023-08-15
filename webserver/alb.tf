@@ -2,7 +2,10 @@ resource "aws_lb" "alb_webserver" {
   name               = "alb-webserver"
   load_balancer_type = "application"
   security_groups    = [var.sgApp]
-  subnets            = [var.subnetPub]
+  enable_http2          = true
+  enable_cross_zone_load_balancing = true
+  enable_deletion_protection = false
+  subnets            = var.subnetPub
 }
 
 resource "aws_lb_listener" "http_webserver" {
@@ -11,32 +14,15 @@ resource "aws_lb_listener" "http_webserver" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "redirect"
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_lb_listener" "https_webserver" {
-  load_balancer_arn = aws_lb.alb_webserver.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.webserver.arn
-
-  default_action {
-    target_group_arn = aws_lb_target_group.example.arn
+    target_group_arn = aws_lb_target_group.webserver.arn
     type             = "forward"
   }
 }
 
 resource "aws_lb_target_group" "webserver" {
-  name        = "example-target-group"
+  name        = "webserver"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = var.VPCIds
   target_type = "instance"
 }

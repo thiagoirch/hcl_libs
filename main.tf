@@ -8,6 +8,7 @@ module "network" {
     environMent = var.envName
     #VPC
     vpcCidr = var.vpcCidr
+    
     #Subnet
     cidrblocksData = var.cidrblocksData
     cidrblocksApp = var.cidrblocksApp
@@ -28,6 +29,7 @@ module "network" {
 }
 module "webserver"{
     source = "./webserver"
+    VPCIds = module.network.outVPCIds
     #sgWebserver = var.outsgAppId
     subnetApp = module.network.outsnAppIds
     subnetPub = module.network.outsnPubIds

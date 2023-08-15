@@ -2,7 +2,7 @@ resource "aws_autoscaling_group" "asg_webserver" {
   name                      = "asg-webserver"
   launch_configuration      = aws_launch_configuration.lc_webserver.name
   min_size                  = 2
-  max_size                  = 5
+  max_size                  = 2
   desired_capacity          = 2
   vpc_zone_identifier = var.subnetApp
 }

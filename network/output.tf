@@ -1,3 +1,9 @@
+#VPC
+ #VPC-ID
+output "outVPCIds" {
+  value = aws_vpc.VPC01.id
+}
+
 #Subnets
  #ID
 output "outsnPubIds" {
