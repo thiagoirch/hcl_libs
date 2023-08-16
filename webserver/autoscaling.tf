@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "asg_webserver" {
   min_size                  = 2
   max_size                  = 2
   desired_capacity          = 2
-  vpc_zone_identifier = var.subnetApp
+  vpc_zone_identifier = var.snPub
 }
 
 resource "aws_autoscaling_policy" "sop_webserver" {

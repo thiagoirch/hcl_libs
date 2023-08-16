@@ -8,6 +8,12 @@ resource "aws_security_group" "sg-Pub" {
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
      }
+     ingress {
+      from_port = 22
+      to_port = 22
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+     }
     
     egress {
         from_port = 0
@@ -20,7 +26,12 @@ resource "aws_security_group" "sg-Pub" {
 resource "aws_security_group" "sg-App" {
     name = "SG-${var.sgApp}-${var.environMent}"
     vpc_id = aws_vpc.VPC01.id
-    
+    ingress {
+      from_port = 22
+      to_port = 22
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+     }
     dynamic "ingress" {
       for_each = var.outsnPubCidr
       content {
@@ -29,6 +40,7 @@ resource "aws_security_group" "sg-App" {
         protocol = "tcp"
         cidr_blocks = [ingress.value]
      }
+    
     }
     egress {
         from_port = 0
@@ -38,7 +50,7 @@ resource "aws_security_group" "sg-App" {
     }
 
 }
-resource "aws_security_group" "sg-data" {
+resource "aws_security_group" "sg-Data" {
     name = "SG-${var.sgData}-${var.environMent}"
     vpc_id = aws_vpc.VPC01.id
     

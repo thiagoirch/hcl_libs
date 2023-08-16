@@ -20,7 +20,7 @@ variable "sgPub" {
     default = "pub"
 }
 variable "envName" {
-    default = "Lab Fantasma"
+    default = "Lab thiagoirch"
 }
 variable "cidrblocksData" {
     default = "10.1.3"
@@ -35,5 +35,5 @@ variable "dbPort" {
     default = "3306"
 }
 variable "httpsPort" {
-    default = "443"
+    default = "80"
 }

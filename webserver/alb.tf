@@ -5,7 +5,7 @@ resource "aws_lb" "alb_webserver" {
   enable_http2          = true
   enable_cross_zone_load_balancing = true
   enable_deletion_protection = false
-  subnets            = var.subnetPub
+  subnets            = var.snPub
 }
 
 resource "aws_lb_listener" "http_webserver" {

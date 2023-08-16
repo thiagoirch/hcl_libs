@@ -12,6 +12,7 @@ variable "outsnAppCidr" {}
 variable "outsnDataCidr" {}
 variable "outsnAppIds" {}
 variable "outsnPubIds" {}
+variable "outsnDataIds" {}
 #Security Groups
 variable "sgData" {}
 variable "sgApp"{}

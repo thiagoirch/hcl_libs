@@ -12,6 +12,9 @@ output "outsnPubIds" {
 output "outsnAppIds" {
   value = aws_subnet.sn_App.*.id
 }
+output "outsnDataIds" {
+  value = aws_subnet.sn_Data.*.id
+}
  #Cidr
 output "outsnPubCidr" {
   value = aws_subnet.sn_Pub.*.cidr_block
@@ -30,4 +33,6 @@ output "outsgPubId" {
 output "outsgAppId" {
   value = aws_security_group.sg-App.id
 }
-
+output "outsgDataId" {
+  value = aws_security_group.sg-Data.id
+}
