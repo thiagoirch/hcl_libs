@@ -1,7 +1,9 @@
 provider "aws" {
     region = var.awsRegion 
 }
-
+module "computeraddons"{
+    source = "./computeraddons"
+}
 module "network" {
     source = "./network"
     subnetAZ = var.availabilityZone
@@ -15,9 +17,12 @@ module "network" {
     cidrblocksPub = var.cidrblocksPub
     outsnPubCidr = module.network.outsnPubCidr
     outsnAppCidr = module.network.outsnAppCidr
+    outsnDataCidr = module.network.outsnDataCidr
     outsnAppIds = module.network.outsnAppIds
     outsnPubIds = module.network.outsnPubIds
-    outsnDataCidr = module.network.outsnDataCidr
+    outsnDataIds = module.network.outsnDataIds
+    
+    
     #Security Group
     sgData = var.sgData
     sgApp = var.sgApp
@@ -26,13 +31,25 @@ module "network" {
     dbPort = var.dbPort
     outsgPubId = module.network.outsgPubId
     outsgAppId = module.network.outsgAppId
+    
 }
 module "webserver"{
     source = "./webserver"
     VPCIds = module.network.outVPCIds
     #sgWebserver = var.outsgAppId
-    subnetApp = module.network.outsnAppIds
-    subnetPub = module.network.outsnPubIds
+    snApp = module.network.outsnAppIds
+    snPub = module.network.outsnPubIds
     sgPub = module.network.outsgPubId
     sgApp = module.network.outsgAppId
+    keyPair = module.computeraddons.outKeypair
+    ssmProfile = module.computeraddons.outssmProfile
+    amiData = module.computeraddons.outAmi
+}
+module "jumpserver"{
+    source = "./jumpserver"
+    keyPair = module.computeraddons.outKeypair
+    ssmProfile = module.computeraddons.outssmProfile
+    amiData = module.computeraddons.outAmi
+    snPub = module.network.outsnPubIds
+    sgPub = module.network.outsgPubId
 }
