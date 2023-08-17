@@ -45,11 +45,11 @@ module "webserver"{
     ssmProfile = module.computeraddons.outssmProfile
     amiData = module.computeraddons.outAmi
 }
-module "jumpserver"{
-    source = "./jumpserver"
-    keyPair = module.computeraddons.outKeypair
-    ssmProfile = module.computeraddons.outssmProfile
-    amiData = module.computeraddons.outAmi
-    snPub = module.network.outsnPubIds
-    sgPub = module.network.outsgPubId
-}
+#module "jumpserver"{
+#    source = "./jumpserver"
+#    keyPair = module.computeraddons.outKeypair
+#    ssmProfile = module.computeraddons.outssmProfile
+#    amiData = module.computeraddons.outAmi
+#    snPub = module.network.outsnPubIds
+#    sgPub = module.network.outsgPubId
+#}

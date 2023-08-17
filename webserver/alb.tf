@@ -1,7 +1,7 @@
 resource "aws_lb" "alb_webserver" {
   name               = "alb-webserver"
   load_balancer_type = "application"
-  security_groups    = [var.sgApp]
+  security_groups    = [var.sgPub]
   enable_http2          = true
   enable_cross_zone_load_balancing = true
   enable_deletion_protection = false
@@ -25,4 +25,13 @@ resource "aws_lb_target_group" "webserver" {
   protocol    = "HTTP"
   vpc_id      = var.VPCIds
   target_type = "instance"
+  health_check {
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    interval            = 6
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    }
 }

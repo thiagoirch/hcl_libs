@@ -3,10 +3,16 @@ resource "aws_security_group" "sg-Pub" {
     vpc_id = aws_vpc.VPC01.id
     
     ingress {
-      from_port = var.httpsPort
-      to_port = var.httpsPort
+      from_port = 80
+      to_port = 80
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
+     }
+     ingress {
+      from_port = 8080
+      to_port = 8080
+      protocol = "tcp"
+      cidr_blocks = ["10.0.0.0/8"]
      }
      ingress {
       from_port = 22
@@ -18,10 +24,9 @@ resource "aws_security_group" "sg-Pub" {
     egress {
         from_port = 0
         to_port = 0
-        protocol = "tcp"
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
-
 }
 resource "aws_security_group" "sg-App" {
     name = "SG-${var.sgApp}-${var.environMent}"
@@ -29,6 +34,12 @@ resource "aws_security_group" "sg-App" {
     ingress {
       from_port = 22
       to_port = 22
+      protocol = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+     }
+    ingress {
+      from_port = 80
+      to_port = 80
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
      }
@@ -45,10 +56,9 @@ resource "aws_security_group" "sg-App" {
     egress {
         from_port = 0
         to_port = 0
-        protocol = "tcp"
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
-
 }
 resource "aws_security_group" "sg-Data" {
     name = "SG-${var.sgData}-${var.environMent}"
@@ -66,9 +76,8 @@ resource "aws_security_group" "sg-Data" {
     egress {
         from_port = 0
         to_port = 0
-        protocol = "tcp"
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
-
 }
 

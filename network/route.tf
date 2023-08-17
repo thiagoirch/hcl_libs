@@ -1,9 +1,22 @@
+
 resource "aws_internet_gateway" "VPC01-igw" {
   vpc_id = aws_vpc.VPC01.id
 
   tags = {
     Name = "VPC01-igw"
   }
+}
+resource "aws_nat_gateway" "natgw01" {
+  allocation_id = aws_eip.eipnatgw01.id
+  subnet_id     = var.outsnPubIds[0]
+}
+resource "aws_eip" "eipnatgw01" {
+  vpc = true
+}
+resource "aws_route" "default_route" {
+  route_table_id         = aws_vpc.VPC01.default_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.VPC01-igw.id
 }
 
 resource "aws_route_table" "rtpub" {
@@ -24,12 +37,12 @@ resource "aws_route" "internet2pub" {
 resource "aws_route" "internet2app" {
   route_table_id = aws_route_table.rtapp.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.VPC01-igw.id 
+  gateway_id = aws_nat_gateway.natgw01.id 
 }
 resource "aws_route" "internet2data" {
   route_table_id = aws_route_table.rtdata.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.VPC01-igw.id 
+  gateway_id = aws_nat_gateway.natgw01.id 
 }
 
 resource "aws_route_table_association" "snpubassoc" {
