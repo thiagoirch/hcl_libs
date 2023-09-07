@@ -6,7 +6,6 @@ resource "aws_autoscaling_group" "asg_webserver" {
   desired_capacity = 2
   vpc_zone_identifier = var.snApp
   target_group_arns = [aws_lb_target_group.webserver.id]
-
 }
 
 resource "aws_autoscaling_policy" "sop_webserver" {

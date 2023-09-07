@@ -14,7 +14,7 @@ resource "aws_launch_configuration" "lc_webserver" {
   user_data = <<-EOF
               #!/bin/bash
               yum install httpd -y
-              echo "Hello world!"> /var/www/html/index.html
+              echo "<p>Hello world!</p>"> /var/www/html/index.html
               service httpd start
               EOF
 }
